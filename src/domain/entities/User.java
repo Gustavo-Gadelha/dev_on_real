@@ -15,6 +15,10 @@ public class User {
         this.name = name;
     }
 
+    public void calculateTotalFines() {
+        this.totalFines = loanHistory.stream().mapToDouble(Loan::getFine).sum();
+    }
+
     public void addLoan(Loan loan) {
         loanHistory.add(loan);
     }
