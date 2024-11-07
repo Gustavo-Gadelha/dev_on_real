@@ -30,6 +30,7 @@ public class Loan {
     public void returnBook(LocalDate returnDate) {
         this.returnDate = returnDate;
         this.isReturned = true;
+        loanCount--;
         calculateFine();
     }
 
