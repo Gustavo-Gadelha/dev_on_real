@@ -16,6 +16,7 @@ public class DataLoader {
             String[] parts = line.split(";");
             users.put(parts[0], new User(parts[0], parts[1]));
         }
+        backupUsers(users, "resouces/usersBackup.txt");
         return users;
     }
 
@@ -30,6 +31,7 @@ public class DataLoader {
                 books.put(parts[0], new Book(parts[0], parts[1], parts[2], parts[3]));
             }
         }
+        backupBooks(books, "resouces/booksBackup.txt");
         return books;
     }
 
@@ -45,6 +47,34 @@ public class DataLoader {
                 loans.add(new Loan(parts[0], book, user, loanDate));
             }
         }
+        backupLoans(loans, "resouces/loansBackup.txt");
         return loans;
+    }
+
+    public static void backupUsers(Map<String, User> users, String filePath) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (User user : users.values()) {
+                writer.write(user.getId() + ";" + user.getName());
+                writer.newLine();
+            }
+        }
+    }
+
+    public static void backupBooks(Map<String, Book> books, String filePath) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Book book : books.values()) {
+                writer.write(book.getId() + ";" + book.getTitle() + ";" + book.getAuthor());
+                writer.newLine();
+            }
+        }
+    }
+
+    public static void backupLoans(List<Loan> loans, String filePath) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (Loan loan : loans) {
+                writer.write(loan.getId() + ";" + loan.getBook().getId() + ";" + loan.getUser().getId() + ";" + loan.getLoanDate());
+                writer.newLine();
+            }
+        }
     }
 }
