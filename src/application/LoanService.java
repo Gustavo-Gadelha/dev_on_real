@@ -25,7 +25,7 @@ public class LoanService {
 
     public void returnBook(String loanId) {
         Loan loan = loanRepository.getLoanById(loanId);
-        if (loan != null) {
+        if (loan != null && !loan.isReturned()) {
             loan.returnBook(LocalDate.now());
         }
     }
