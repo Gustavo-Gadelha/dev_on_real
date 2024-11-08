@@ -2,6 +2,7 @@ package infrastructure.repositories;
 
 import domain.entities.Book;
 import domain.repositories.BookRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +21,14 @@ public class InMemoryBookRepository implements BookRepository {
                 .filter(book -> book.getId().equals(id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public List<Book> getBookByAuthorAndGenre(String author, String genre) {
+        return books.stream()
+                .filter(book -> book.getAuthor().equals(author))
+                .filter(book -> book.getGenre().equals(genre))
+                .toList();
     }
 
     @Override

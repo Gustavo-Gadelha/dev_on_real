@@ -9,6 +9,8 @@ public interface BookRepository {
 
     Book getBookById(String id);
 
+    List<Book> getBookByAuthorAndGenre(String author, String genre);
+
     List<Book> searchBooks(String keyword);
 
     List<Book> getAllBooks();
