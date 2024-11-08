@@ -17,6 +17,15 @@ public class LoanService {
     }
 
     public void loanBook(Book book, User user) {
+        boolean userHasFines = user
+                .getLoanHistory()
+                .stream()
+                .anyMatch(loan -> loan.getFine() > 0 && !loan.isReturned());
+
+        if (userHasFines) {
+            return;
+        }
+
         String loanId = UUID.randomUUID().toString();
         Loan loan = new Loan(loanId, book, user, LocalDate.now());
         loanRepository.addLoan(loan);
