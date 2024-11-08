@@ -1,13 +1,14 @@
 package domain.entities;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 public class User {
     private String id;
     private String name;
-    private List<Loan> loanHistory = new ArrayList<>();
+    private List<Loan> loanHistory = Collections.synchronizedList(new ArrayList<>());
     private double totalFines = 0.0;
 
     public User(String id, String name) {
