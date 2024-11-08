@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class LoanService {
     private final LoanRepository loanRepository;
-    private static final int MAX_LOANS = 999999;
+    private static final int MAX_LOANS = 1000;
 
     public LoanService(LoanRepository loanRepository) {
         this.loanRepository = loanRepository;
