@@ -10,11 +10,12 @@ import java.util.*;
 public class DataLoader {
     public static Map<String, User> loadUsers(String filePath) throws IOException {
         Map<String, User> users = new HashMap<>();
-        BufferedReader reader = new BufferedReader(new FileReader(filePath));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(";");
-            users.put(parts[0], new User(parts[0], parts[1]));
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                users.put(parts[0], new User(parts[0], parts[1]));
+            }
         }
         return users;
     }
